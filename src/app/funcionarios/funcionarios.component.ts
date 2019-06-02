@@ -12,9 +12,9 @@ export class FuncionariosComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.fetchCidades();
+    this.fetchFuncionarios();
   }
-  fetchCidades(){
+  fetchFuncionarios(){
     this.appService.getFuncionarios().subscribe((data:  Array<object>) => {
       this.dataSource  =  data;
       console.log(data);

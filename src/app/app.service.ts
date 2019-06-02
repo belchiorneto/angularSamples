@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class AppService {
 
-  API_URL  =  'http://localhost:8080/Api/Novo2';
+  API_URL  =  'http://localhost:8080/angularSampleApi/crud';
   constructor(private  httpClient:  HttpClient) {}
 
   getFuncionarios(){
