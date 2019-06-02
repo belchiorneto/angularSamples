@@ -10,22 +10,68 @@ import { Chart } from 'chart.js';
 export class FuncionariosComponent implements OnInit {
 
   dataSource  = [];
+  dataSource2  = [];
+  
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.appService.getFuncionarios()
-    .subscribe(data => {
-
-      let salario = data
-      console.log(salario)
-    })
-    
+    this.carregaGrafico("funcionarios", "canvas_funcionario", "pie", this.dataSource);
+    this.carregaGrafico("clientes", "canvas_clientes", "bar", this.dataSource2);
   }
-  fetchFuncionarios(){
-    this.appService.getFuncionarios().subscribe((data:  Array<object>) => {
-      this.dataSource  =  data;
-      console.log(data);
-    });
+    carregaGrafico(tname: string, grafico: string, tipoGrafico: string, dataS: any){
+     
+      this.appService.getData(tname)
+      .subscribe(data => {
+        let nomes = data[tname].map(res => res.nome)
+        let salario = "";
+        if(tname == "clientes"){
+          salario = data[tname].map(res => res.credito)
+        }else{
+          salario = data[tname].map(res => res.salario)
+        }
+        
+        console.log(salario);
+        dataS = new Chart(grafico, {
+          type: tipoGrafico,
+          data: {
+            labels: nomes,
+            datasets: [
+              {
+                label: "Salário",
+                data: salario,
+                backgroundColor: "rgba(255,99,132,0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 2,
+                hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                hoverBorderColor: "rgba(255,99,132,1)"
+              },
+            ]
+          },
+          options: {
+            title: {
+                display: true,
+                text: 'Salário dos ' + tname
+            },
+            legend: {
+              display: true,
+            },
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  display:false
+                }
+              }],
+              yAxes: [{
+                stacked:true,
+                gridLines: {
+                  display:true,
+                  color:"rgba(255,99,132,0.2)"
+                }
+              }]
+            }
+          }
+        })
+  
+      })
+    }    
   }
-
-}

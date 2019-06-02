@@ -12,10 +12,10 @@ const httpOptions = {
 })
 export class AppService {
 
-  API_URL  =  'http://localhost:8080/angularSampleApi/crud';
+  API_URL  =  'http://localhost:8080/ServletTeste/Funcionario';
   constructor(private  httpClient:  HttpClient) {}
 
-  getFuncionarios(){
+  getData(tableName: String){
     return  this.httpClient.get(`${this.API_URL}`, httpOptions);
   }
 }
