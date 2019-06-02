@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AppService} from '../app.service';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'app-funcionarios',
@@ -12,7 +13,13 @@ export class FuncionariosComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit() {
-    this.fetchFuncionarios();
+    this.appService.getFuncionarios()
+    .subscribe(data => {
+
+      let salario = data
+      console.log(salario)
+    })
+    
   }
   fetchFuncionarios(){
     this.appService.getFuncionarios().subscribe((data:  Array<object>) => {
