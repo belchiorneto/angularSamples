@@ -12,7 +12,7 @@ const httpOptions = {
 })
 export class AppService {
 
-  API_URL  =  'http://localhost:8080/ServletTeste/Funcionario';
+  API_URL  =  'http://localhost:8080/TestandoApiServlet/Funcionario';
   constructor(private  httpClient:  HttpClient) {}
 
   getData(tableName: String){
