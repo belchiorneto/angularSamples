@@ -18,6 +18,19 @@ export class AppService {
   getData(tableName: String){
     return  this.httpClient.get(`${this.API_URL}`, httpOptions);
   }
+  
+  updateField(tableName: String, fieldName: String, identification: String, newValue: String){
+   
+    return  this.httpClient.post(`${this.API_URL}`,
+    {
+      operacao: "updateTable",
+      tabela: tableName,
+      campo: fieldName,
+      newvalue: newValue,
+      id: identification
+    } , httpOptions);
+   
+  }
 }
 
 

@@ -1,8 +1,31 @@
 
-<div *ngIf="dataSource">
-    <canvas id="canvas_funcionario" width="400" height="200">{{dataSource}}</canvas>
+<p>
+    <mat-form-field appearance="outline">
+      <mat-label>Nome</mat-label>
+      <input #nome_funcionario matInput placeholder="Nome">
+      
+      <mat-hint></mat-hint>
+    </mat-form-field>
+  </p>
+
+  <button mat-raised-button color="primary" (click)="update()">ATUALIZAR</button>
+
+
+<div id="teste_div" *ngIf="dataSource">
+    <canvas id="canvas_funcionario" width="600" height="600">{{dataSource}}</canvas>
 </div>
 <div *ngIf="dataSource2">
-    <canvas id="canvas_clientes" width="400" height="200">{{dataSource2}}</canvas>
+    <canvas id="canvas_clientes" width="600" height="600">{{dataSource2}}</canvas>
 </div>
+<div *ngIf="dataSource2">
+    <canvas id="canvas_clientes2" width="600" height="600">{{dataSource2}}</canvas>
+</div>
+<div *ngIf="dataSource">
+    <canvas id="canvas_funcionario2" width="600" height="600">{{dataSource}}</canvas>
+</div>
+
+<div *ngIf="dataSource2">
+    <canvas id="canvas_funcionario3" width="600" height="600">{{dataSource2}}</canvas>
+</div>
+
 
