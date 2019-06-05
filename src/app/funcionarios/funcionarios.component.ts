@@ -1,6 +1,6 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
 import {AppService} from '../app.service';
-import {Graficos} from '../innovationLib/Graficos';
+import {Grafico} from '../innovationLib/Graficos';
 
 @Component({
   selector: 'app-funcionarios',
@@ -9,35 +9,50 @@ import {Graficos} from '../innovationLib/Graficos';
 })
 
 
-export class FuncionariosComponent extends Graficos implements OnInit {
+export class FuncionariosComponent implements OnInit {
   
   dataSource  = [];
   dataSource2  = [];
-  
- 
-  
+  dataTables : any; 
+  formTable: any;
+  tiposGrafico = ["line", "pie", "bar", "radar"];
+
+  public grafico: Grafico;
   constructor(
-    private appService2: AppService) { 
-    super(appService2);
+    private appService: AppService) { 
+    
   }
 
   ngOnInit() {
-    this.geraGrafico("funcionarios", "canvas_funcionario", "pie", this.dataSource);
-    this.geraGrafico("clientes", "canvas_clientes", "bar", this.dataSource);
-    this.geraGrafico("funcionarios", "canvas_funcionario2", "line", this.dataSource);
-    this.geraGrafico("clientes", "canvas_clientes2", "radar", this.dataSource);
-    
+    this.appService.getTableData("funcionarios")
+      .subscribe(dataTables => this.dataTables = dataTables);
+     
   }
   @ViewChild('nome_funcionario') nome_funcionario: ElementRef;
   
   update(){
-    console.log(this.nome_funcionario.nativeElement.value);
+    
     let newNome: String = this.nome_funcionario.nativeElement.value;
-   
-
-    this.appService2.updateField("funcionarios", "nome", "3", newNome)
+    this.appService.updateField("funcionarios", "nome", "3", newNome)
       .subscribe(data => {
         console.log(data);
     })
   }  
+
+  // monta um formulário editável de acordo com os valores de uma tabela
+  showForm(tablename, tipoGrafico){
+    this.appService.getTableData(tablename)
+      .subscribe(dataTables => this.formTable = dataTables[tablename]);
+    
+    this.grafico = new Grafico(this.appService);
+    this.grafico.setTipo(tipoGrafico);
+    this.grafico.setReceptor("canvas_grafico");
+    this.grafico.setTablename(tablename);
+    this.grafico.geraGrafico();
+  }
+  geraGrafico(tipoGrafico, tablename){
+    this.grafico.setTipo(tipoGrafico);
+    this.grafico.setTablename(tablename);
+    this.grafico.geraGrafico();
+  }
 }

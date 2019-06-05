@@ -1,9 +1,14 @@
+import { Injectable } from '@angular/core';
 import {AppService} from '../app.service';
 import { Chart } from 'chart.js';
 
+@Injectable()
+export class Grafico {
+    tipo: string;
+    grafico: any;
+    receptor: string;
+    tableName: string; 
 
-export class Graficos {
- 
     constructor(
       private appService: AppService) { }
     
@@ -11,41 +16,40 @@ export class Graficos {
 
     // recebe o nome de uma tabela [tname], um recibiente de grafico [grafico], 
     //um tipo de grafico [tipoGrafico] e um array de dados e gera o gráfico na tela
-    geraGrafico(tname: string, grafico: string, tipoGrafico: string, dataS: any){
-     
-
-      this.appService.getData(tname)
+    geraGrafico(){
+      
+      this.appService.getData(this.tableName)
       .subscribe(data => {
-        let nomes = data[tname].map(res => res.nome)
+        let locallabels = data[this.tableName].map(res => res.nome)
         let salario = "";
-        if(tname == "clientes"){
-          salario = data[tname].map(res => res.credito)
+        if(this.tableName == "clientes"){
+          salario = data[this.tableName].map(res => res.credito)
         }else{
-          salario = data[tname].map(res => res.salario)
+          salario = data[this.tableName].map(res => res.salario)
         }
-        dataS = new Chart(grafico, {
-          type: tipoGrafico,
+        this.grafico = new Chart(this.receptor, {
+          type: this.tipo,
           data: {
-            labels: nomes,
+            labels: locallabels,
             datasets: [
               {
                 label: "Salário",
                 data: salario,
                 backgroundColor: [
-                  "rgba(230,215,0,1)",
-                  "rgba(230,200,0,1)",
-                  "rgba(230,185,0,1)",
-                  "rgba(230,160,0,1)",
-                  "rgba(230,145,0,1)",
-                  "rgba(230,130,0,1)",
-                  "rgba(230,115,0,1)",
-                  "rgba(230,100,0,1)",
-                  "rgba(230,85,0,1)",
+                  "rgba(0,215,0,1)",
+                  "rgba(0,200,0,1)",
+                  "rgba(0,185,0,1)",
+                  "rgba(0,160,0,1)",
+                  "rgba(0,145,0,1)",
+                  "rgba(0,130,0,1)",
+                  "rgba(0,115,0,1)",
+                  "rgba(0,100,0,1)",
+                  "rgba(0,85,0,1)",
                 ],
-                borderColor: "rgba(255,50,100,1)",
+                borderColor: "rgba(0,150,0,1)",
                 borderWidth: 2,
-                hoverBackgroundColor: "rgba(255,99,132,0.4)",
-                hoverBorderColor: "rgba(255,99,132,1)"
+                hoverBackgroundColor: "rgba(0,250,0,0.4)",
+                hoverBorderColor: "rgba(0,150,0,1)"
               },
             ]
           },
@@ -53,7 +57,7 @@ export class Graficos {
             responsive: false,
             title: {
                 display: true,
-                text: 'Salário dos ' + tname
+                text: 'Salário dos ' + this.tableName
             },
             legend: {
               display: true,
@@ -76,5 +80,24 @@ export class Graficos {
         })
   
       })
-    }  
+    }
+    setTipo(tipo: string){
+      this.tipo = tipo;
+    }
+    setDados(grafico: any){
+      this.grafico = grafico;
+    }
+    setReceptor(canvas: string){
+      this.receptor = canvas;
+    }
+
+    setTablename(tablename: string){
+      this.tableName = tablename;
+    }
+    reload(){
+      this.grafico.type = this.tipo;
+      this.geraGrafico();
+      this.grafico.update();
+      console.log("Recarregando grafico: " + this.grafico.type);
+    }
  }

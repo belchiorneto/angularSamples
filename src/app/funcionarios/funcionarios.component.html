@@ -1,19 +1,48 @@
 
-<p>
-    <mat-form-field appearance="outline">
-      <mat-label>Nome</mat-label>
-      <input #nome_funcionario matInput placeholder="Nome">
-      
-      <mat-hint></mat-hint>
-    </mat-form-field>
-  </p>
+<mat-form-field>
+    <mat-label>Tabelas Disponiveis</mat-label>
+        <mat-select #select_tables (selectionChange)="showForm(select_tables.value, select_grafico.value)" >
+           
+            <mat-option *ngFor="let table of dataTables | keyvalue" [value]="table.key">
+            {{table.key}}
+            </mat-option>
+        </mat-select>
+    <mat-hint></mat-hint>
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Tipo de Gráfico</mat-label>
+    
+    <mat-select #select_grafico (selectionChange)="geraGrafico(select_grafico.value, select_tables.value)" >
+        
+        <mat-option *ngFor="let tipo of tiposGrafico" [value]="tipo">
+        {{tipo}}
+        </mat-option>
+    </mat-select>
+    
+</mat-form-field>
+<table>
+    <tr><td>
+        <div *ngFor="let item of formTable | keyvalue">
+            {{item.key}} - 
+            <span *ngFor="let field of item.value | keyvalue">
+                <mat-form-field  appearance="outline">
+                    <mat-label>{{field.key}}</mat-label>
+                    <input #nome_funcionario matInput placeholder="{{field.value}}">
+                </mat-form-field>
+            </span>
+        </div>
+    </td>
+    <td>
+        <div id="teste_div">
+            <canvas id="canvas_grafico" width="600" height="600">{{dataSource}}</canvas>
+        </div>
+    </td>
+    </tr>
+</table>
+<button mat-raised-button color="primary" (click)="update()">ATUALIZAR</button>
 
-  <button mat-raised-button color="primary" (click)="update()">ATUALIZAR</button>
 
 
-<div id="teste_div" *ngIf="dataSource">
-    <canvas id="canvas_funcionario" width="600" height="600">{{dataSource}}</canvas>
-</div>
 <div *ngIf="dataSource2">
     <canvas id="canvas_clientes" width="600" height="600">{{dataSource2}}</canvas>
 </div>

@@ -5,7 +5,8 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
  // MatInputModule,
  // MatRippleModule
 } from '@angular/material';
@@ -30,6 +31,7 @@ import { FuncionariosComponent } from './funcionarios/funcionarios.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
     BrowserAnimationsModule
   ],
   providers: [],
