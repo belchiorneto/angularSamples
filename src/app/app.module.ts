@@ -17,11 +17,13 @@ import { HttpClientModule } from  '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
+import { ClientesComponent } from './clientes/clientes.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FuncionariosComponent
+    FuncionariosComponent,
+    ClientesComponent
   ],
   imports: [
     BrowserModule,

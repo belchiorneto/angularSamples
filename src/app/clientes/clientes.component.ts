@@ -3,14 +3,13 @@ import {AppService} from '../app.service';
 import {Grafico} from '../innovationLib/Graficos';
 
 @Component({
-  selector: 'app-funcionarios',
-  templateUrl: './funcionarios.component.html',
-  styleUrls: ['./funcionarios.component.scss']
+  selector: 'app-clientes',
+  templateUrl: './clientes.component.html',
+  styleUrls: ['./clientes.component.scss']
 })
+export class ClientesComponent implements OnInit {
 
 
-export class FuncionariosComponent implements OnInit {
-  
   dataSource  = [];
   dataSource2  = [];
   dataTables : any; 
@@ -54,4 +53,5 @@ export class FuncionariosComponent implements OnInit {
     this.grafico.setTablename(tablename);
     this.grafico.geraGrafico();
   }
+
 }
