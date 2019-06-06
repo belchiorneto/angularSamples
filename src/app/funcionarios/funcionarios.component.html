@@ -1,4 +1,21 @@
+<mat-form-field  appearance="outline">
+    <mat-label>Nome da Tabela</mat-label>
+    <input #nome_new_table matInput placeholder="Nova Tabela">
+</mat-form-field>
+<mat-form-field  appearance="outline">
+    <mat-label>Quantidade de Campos</mat-label>
+    <input #qt_campos_table matInput placeholder="qtd Campos" (keyup)="montaTableForm(qt_campos_table.value)">
+</mat-form-field>
+<br>
 
+
+<mat-form-field  appearance="outline" *ngFor="let field of formArray.controls; let i=index">
+    <mat-label>{{i}}</mat-label>
+    <input id="custom_fields_{{i}}" matInput placeholder="{{field.value}}" value="">
+</mat-form-field>
+<br>
+<button mat-raised-button color="primary" (click)="createTable(nome_new_table.value)">Criar Tabela</button>
+<br>
 <mat-form-field>
     <mat-label>Tabelas Disponiveis</mat-label>
         <mat-select #select_tables (selectionChange)="showForm(select_tables.value, select_grafico.value)" >

@@ -1,4 +1,5 @@
 import { Component, OnInit, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import {FormArray, FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AppService} from '../app.service';
 import {Grafico} from '../innovationLib/Graficos';
 
@@ -10,20 +11,25 @@ import {Grafico} from '../innovationLib/Graficos';
 
 
 export class FuncionariosComponent implements OnInit {
-  
+  registrationForm: FormGroup;
   dataSource  = [];
   dataSource2  = [];
   dataTables : any; 
   formTable: any;
+  formArray: FormArray;
   tiposGrafico = ["line", "pie", "bar", "radar"];
 
   public grafico: Grafico;
   constructor(
-    private appService: AppService) { 
-    
+    private appService: AppService,
+    private fb: FormBuilder) { 
+      this.formArray = this.fb.array([])
   }
 
   ngOnInit() {
+    this.registrationForm = this.fb.group({
+      formArray: this.fb.array([])
+    })
     this.appService.getTableData("funcionarios")
       .subscribe(dataTables => this.dataTables = dataTables); 
   }
@@ -34,7 +40,7 @@ export class FuncionariosComponent implements OnInit {
     let newNome: String = this.nome_funcionario.nativeElement.value;
     this.appService.updateField("funcionarios", "nome", "3", newNome)
       .subscribe(data => {
-        console.log(data);
+       
     })
   }  
 
@@ -54,4 +60,19 @@ export class FuncionariosComponent implements OnInit {
     this.grafico.setTablename(tablename);
     this.grafico.geraGrafico();
   }
+
+  montaTableForm(qtCampos){
+    this.formArray = this.fb.array([]);
+    for(let i = 0; i<qtCampos; i++){
+      this.formArray.push(new FormControl());
+    }
+  }
+  createTable(tableName){
+   
+    let inputValue = (document.getElementById("custom_fields_0") as HTMLInputElement).value;
+      console.log(inputValue); 
+      
+   
+  }
+
 }

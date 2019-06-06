@@ -13,6 +13,8 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from  '@angular/common/http';
+import {FormBuilder} from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,7 +38,7 @@ import { ClientesComponent } from './clientes/clientes.component';
     MatSelectModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
