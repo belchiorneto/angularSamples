@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
+import { TableComponent } from './table/table.component';
 import { ClientesComponent } from './clientes/clientes.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'funcionariosx', pathMatch: 'full' 
+  { path: '', redirectTo: 'table', pathMatch: 'full' 
 },
   {
-    path: 'funcionariosx',
-    component: FuncionariosComponent
+    path: 'table',
+    component: TableComponent
   },
   {
     path: 'clientes',

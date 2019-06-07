@@ -20,12 +20,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FuncionariosComponent } from './funcionarios/funcionarios.component';
 import { ClientesComponent } from './clientes/clientes.component';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FuncionariosComponent,
-    ClientesComponent
+    ClientesComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

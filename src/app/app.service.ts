@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class AppService {
 
-  API_URL  =  'http://localhost:8080/ServletTeste/Funcionario';
+  API_URL  =  'http://localhost:8080/TesteTomcat/Api';
   constructor(private  httpClient:  HttpClient) {}
 
   getData(tableName: String){
@@ -26,6 +26,30 @@ export class AppService {
       
   }
 
+  createTable(tableName: String, fields){
+   
+    return  this.httpClient.post(`${this.API_URL}`,
+    {
+      operacao: "addTable",
+      valores: {
+        table: tableName,
+        campos: fields
+      }
+    } , httpOptions);
+   
+  }
+
+  inserirDados(tableName, fields){
+    return  this.httpClient.post(`${this.API_URL}`,
+    {
+      operacao: "inserirDados",
+      table: tableName,
+      valores: {
+        table: tableName,
+        campos: fields
+      }
+    } , httpOptions);
+  }
   updateField(tableName: String, fieldName: String, identification: String, newValue: String){
    
     return  this.httpClient.post(`${this.API_URL}`,
