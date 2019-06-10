@@ -39,6 +39,19 @@ export class AppService {
    
   }
 
+  updateTable(tableName: String, dados){
+   
+    return  this.httpClient.post(`${this.API_URL}`,
+    {
+      operacao: "updateTable",
+      valores: {
+        table: tableName,
+        campos: dados
+      }
+    } , httpOptions);
+   
+  }
+
   inserirDados(tableName, fields){
     return  this.httpClient.post(`${this.API_URL}`,
     {

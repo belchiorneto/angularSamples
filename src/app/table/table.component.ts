@@ -11,7 +11,7 @@ import {Grafico} from '../innovationLib/Graficos';
 
 
 export class TableComponent implements OnInit {
-  
+  selected_new_table = '';
   dataSource  = [];
   dataSource2  = [];
   dataTables : any; 
@@ -38,6 +38,7 @@ export class TableComponent implements OnInit {
   }  
 
   // monta um formulário editável de acordo com os valores de uma tabela
+  // TODO: refatorar
   showForm(tablename, tipoGrafico){
     this.formTable = this.appService.getTableData(tablename)
       .subscribe(dataTables => {
@@ -80,13 +81,13 @@ export class TableComponent implements OnInit {
         this.formTable = dataTables[tableName];
         this.formArray = this.fb.array([]); // limpa form de fields
         this.showForm(tableName, "");
-        let tableSelect = (document.getElementById("select_tables") as HTMLInputElement);
-        tableSelect.select();
+       
+        this.selected_new_table = tableName;
       });
       
   }
 
-
+  // TODO: refatorar
   insertDados(tableName){
     let fields = [];
     for (let key in this.camposVazios) {
@@ -99,9 +100,29 @@ export class TableComponent implements OnInit {
       .subscribe(dataTables => {
         this.formTable = dataTables[tableName];
         this.formArray = this.fb.array([]); // limpa form de fields
+        this.grafico.setTablename(tableName);
+        this.grafico.geraGrafico();
       });
+  }
+  // TODO: refatorar
+  updateTable(tableName){
     
-   
+    for(let i = 0; i< this.dataTables[tableName].length - 1; i++){
+       for(let key in this.dataTables[tableName][i]){
+        let inputValue = (document.getElementById("update_"+i+"_"+key) as HTMLInputElement).value;
+      
+        this.dataTables[tableName][i][key] = inputValue;
+        
+        
+      }
+    }
+    this.appService.updateTable(tableName, this.dataTables[tableName])
+      .subscribe(dataTables => {
+        this.formTable = dataTables[tableName];
+        this.formArray = this.fb.array([]); // limpa form de fields
+        this.grafico.setTablename(tableName);
+        this.grafico.geraGrafico();
+      });
   }
 
 }

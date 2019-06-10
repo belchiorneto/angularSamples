@@ -18,9 +18,9 @@
 <br>
 <mat-form-field>
   <mat-label>Tabelas Disponiveis</mat-label>
-      <mat-select id="select_tables" #select_tables (selectionChange)="showForm(select_tables.value, select_grafico.value)" >
+      <mat-select id="select_tables" #select_tables (selectionChange)="showForm(select_tables.value, select_grafico.value)" [(value)]="selected_new_table">
          
-          <mat-option *ngFor="let table of dataTables | keyvalue" [value]="table.key">
+          <mat-option *ngFor="let table of dataTables | keyvalue" [value]="table.key" >
           {{table.key}}
           </mat-option>
       </mat-select>
@@ -40,11 +40,11 @@
 <table>
   <tr><td>
       <div *ngFor="let item of formTable | keyvalue">
-          {{item.key}} - 
-          <span *ngFor="let field of item.value | keyvalue">
-              <mat-form-field  appearance="outline">
+         
+          <span id="update_{{keyvalue}}" *ngFor="let field of item.value | keyvalue">
+              <mat-form-field appearance="outline"> 
                   <mat-label>{{field.key}}</mat-label>
-                  <input matInput placeholder="{{field.key}}" value="{{field.value}}">
+                  <input id="update_{{item.key}}_{{field.key}}" matInput placeholder="{{field.key}}" value="{{field.value}}">
               </mat-form-field>
           </span>
       </div>
@@ -64,7 +64,7 @@
   </td>
   </tr>
 </table>
-<button mat-raised-button color="primary" (click)="update()">ATUALIZAR</button>
+<button mat-raised-button color="primary" (click)="updateTable(select_tables.value)">ATUALIZAR</button>
 <button mat-raised-button color="primary" (click)="insertDados(select_tables.value)">INSERIR</button>
 
 

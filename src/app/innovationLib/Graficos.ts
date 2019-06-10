@@ -54,7 +54,7 @@ export class Grafico {
             ]
           },
           options: {
-            responsive: false,
+            responsive: true,
             title: {
                 display: true,
                 text: 'Salário dos ' + this.tableName
@@ -84,9 +84,7 @@ export class Grafico {
     setTipo(tipo: string){
       this.tipo = tipo;
     }
-    setDados(grafico: any){
-      this.grafico = grafico;
-    }
+   
     setReceptor(canvas: string){
       this.receptor = canvas;
     }
