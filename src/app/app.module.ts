@@ -6,14 +6,15 @@ import {
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSelectModule
- // MatInputModule,
- // MatRippleModule
+  MatSelectModule,
+  
+ 
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from  '@angular/common/http';
 import {FormBuilder} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +37,8 @@ import { TableComponent } from './table/table.component';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule, ReactiveFormsModule
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent]

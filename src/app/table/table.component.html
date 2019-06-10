@@ -1,3 +1,14 @@
+<label>
+  Txt1:
+  <input type="text" [formControl]="textbox1">
+</label>
+<label>
+  Txt2:
+  <input type="text" [formControl]="textbox2">
+</label>
+
+<button mat-raised-button color="primary" (click)="move()">COPIAR</button>
+
 <mat-form-field  appearance="outline">
   <mat-label>Nome da Tabela</mat-label>
   <input #nome_new_table matInput placeholder="Nova Tabela">

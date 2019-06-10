@@ -18,6 +18,8 @@ export class TableComponent implements OnInit {
   formTable: any;
   formArray: FormArray;
   camposVazios: any; // necessário para a inclusao de uma nova tupla
+  textbox1 = new FormControl('');
+  textbox2 = new FormControl('');
 
   tiposGrafico = ["line", "pie", "bar", "radar"];
 
@@ -29,8 +31,8 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.appService.getTableData("funcionarios")
-      .subscribe(dataTables => this.dataTables = dataTables); 
+    //this.appService.getTableData("funcionarios")
+    //  .subscribe(dataTables => this.dataTables = dataTables); 
   }
   
   update(){
@@ -124,5 +126,7 @@ export class TableComponent implements OnInit {
         this.grafico.geraGrafico();
       });
   }
-
+  move(){
+    this.textbox2.setValue(this.textbox1.value);
+  }
 }
