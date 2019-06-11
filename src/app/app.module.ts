@@ -1,3 +1,4 @@
+import { Formularios } from './innovationLib/Formularios';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -21,12 +22,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { TableComponent } from './table/table.component';
+import { TextBoxComponent } from './text-box/text-box.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClientesComponent,
-    TableComponent
+    TableComponent,
+    TextBoxComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import { TableComponent } from './table/table.component';
     BrowserAnimationsModule,
     FormsModule, ReactiveFormsModule
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder, Formularios],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

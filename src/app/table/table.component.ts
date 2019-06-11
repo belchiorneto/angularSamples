@@ -31,8 +31,8 @@ export class TableComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.appService.getTableData("funcionarios")
-    //  .subscribe(dataTables => this.dataTables = dataTables); 
+    this.appService.getTableData("funcionarios")
+      .subscribe(dataTables => this.dataTables = dataTables); 
   }
   
   update(){

@@ -1,0 +1,10 @@
+<mat-form-field  appearance="outline">
+  <mat-label>TextBox1</mat-label>
+  <input matInput placeholder="textbox1" [formControl]="textbox1">
+</mat-form-field>
+<mat-form-field  appearance="outline">
+  <mat-label>TextBox2</mat-label>
+  <input matInput placeholder="textbox2" [formControl]="textbox2">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="move()">Move</button>
